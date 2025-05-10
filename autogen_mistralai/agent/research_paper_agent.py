@@ -90,6 +90,20 @@ def get_tool_calls(chat_result: ChatResult):
             tool_call_history.extend(list(tool_calls))
     return tool_call_history
 
+
+def find_final_answer(chat_result: ChatResult):
+    # Get the chat history
+    messages = chat_result.chat_history
+
+    # Return the last non-empty, non-TERMINATE message
+    for message in reversed(messages):
+        content = message.get("content", "")
+        if content and content.strip().upper() != "TERMINATE":
+            return content.strip()
+
+    # If nothing found, return None
+    return None
+
 def main():
     user_proxy, research_paper_agent = setup_agents()
     # Example task
