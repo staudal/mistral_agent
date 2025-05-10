@@ -93,7 +93,7 @@ def get_tool_calls(chat_result: ChatResult):
 def main():
     user_proxy, research_paper_agent = setup_agents()
     # Example task
-    task = "Find 2 research papers on machine learning that has at least 1000 citations between 2012 and 2016"
+    task = "Find 5 research papers on artificial intelligence that has at least 1000 citations between 2001 and 2025"
     user_proxy.initiate_chat(
         research_paper_agent,
         message=task,
