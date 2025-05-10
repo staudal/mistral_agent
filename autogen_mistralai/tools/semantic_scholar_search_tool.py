@@ -38,9 +38,14 @@ def semantic_scholar_search(
             continue
         if min_citations and (citation_count is None or citation_count < min_citations):
             continue
+        authors_data = paper.get("authors", [])
+        if isinstance(authors_data, list):
+            authors = [a.get("name", "") for a in authors_data if isinstance(a, dict)]
+        else:
+            authors = [str(authors_data)]
         results.append({
             "title": paper.get("title", ""),
-            "authors": [a.get("name", "") for a in paper.get("authors", [])],
+            "authors": authors,
             "year": year,
             "citation_count": citation_count,
             "url": paper.get("url", "")
