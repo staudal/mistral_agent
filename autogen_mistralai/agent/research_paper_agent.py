@@ -4,6 +4,7 @@ from autogen import AssistantAgent, UserProxyAgent, ChatResult, register_functio
 from autogen.coding import LocalCommandLineCodeExecutor
 from autogen_mistralai.tools.semantic_scholar_search_tool import semantic_scholar_search
 from autogen_mistralai.config import LLM_CONFIG
+from autogen_mistralai.tools.format_papers_tool import format_papers
 
 ReAct_prompt = """
 Answer the following questions as best you can. You have access to the tools provided.
@@ -69,6 +70,16 @@ def setup_agents():
         description="Search for research papers by topic, citation count, year range, and count."
     )
 
+    # Register the format papers tool
+    print("registering format papers tool")
+    register_function(
+        format_papers,
+        caller=research_paper_agent,
+        executor=user_proxy,
+        name="format_papers",
+        description="Format a list of research papers into a readable, bulleted list."
+    )
+
     return user_proxy, research_paper_agent
 
 def get_tool_calls(chat_result: ChatResult):
@@ -82,7 +93,7 @@ def get_tool_calls(chat_result: ChatResult):
 def main():
     user_proxy, research_paper_agent = setup_agents()
     # Example task
-    task = "Find 6 research papers on climate change that has at least 10 citations and is published between 2012 and 2016"
+    task = "Find 2 research papers on machine learning that has at least 1000 citations between 2012 and 2016"
     user_proxy.initiate_chat(
         research_paper_agent,
         message=task,
