@@ -34,6 +34,22 @@ autogen_mistralai/
 3. **Modify the Query:**
    - Edit the `task` variable in `autogen_mistralai/agent/research_paper_agent.py` to use your own search prompt.
 
+## How to Run the Evaluator
+You can automatically evaluate the research paper agent's responses to a set of prompts using the evaluator script:
+
+1. **Navigate to the project root (if not already there):**
+   ```sh
+   cd /Users/jakobstaudal/aiagent
+   ```
+2. **Run the evaluator module:**
+   ```sh
+   python -m autogen_mistralai.agent.evaluate_agent
+   ```
+   This will run a set of predefined prompts (see the `prompts` list in `autogen_mistralai/agent/evaluate_agent.py`) and print both the agent's response and a critic's evaluation for each prompt.
+
+3. **Modify the Evaluation Prompts:**
+   - Edit the `prompts` list in `autogen_mistralai/agent/evaluate_agent.py` to test your own queries.
+
 ## Example Output
 ```
 1. Climate Change 2014 - Synthesis Report
