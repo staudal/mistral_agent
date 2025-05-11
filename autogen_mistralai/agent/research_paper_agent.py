@@ -1,5 +1,4 @@
 import ast
-import copy
 from autogen import AssistantAgent, UserProxyAgent, ChatResult, register_function
 from autogen.coding import LocalCommandLineCodeExecutor
 from autogen_mistralai.tools.semantic_scholar_search_tool import semantic_scholar_search
@@ -33,7 +32,7 @@ def create_research_paper_agent() -> AssistantAgent:
         system_message="""
         Only use tools. Don't try to reason. Reply TERMINATE when the task is done.
         """,
-        llm_config=copy.deepcopy(LLM_CONFIG)
+        llm_config=LLM_CONFIG
     )
     return agent
 
@@ -114,4 +113,4 @@ def main():
     )
 
 if __name__ == "__main__":
-    main() 
+    main()
