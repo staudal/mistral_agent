@@ -15,9 +15,6 @@ def semantic_scholar_search(
     year_to: Annotated[Optional[int], "End year (inclusive)"],
     count: Annotated[int, "Number of papers to return"]
 ) -> Annotated[List[Paper], "A list of research papers matching the criteria."]:
-    """
-    Search Semantic Scholar for papers matching the criteria.
-    """
     url = "https://api.semanticscholar.org/graph/v1/paper/search"
     params = {
         "query": topic,
@@ -52,4 +49,4 @@ def semantic_scholar_search(
         })
         if len(results) >= count:
             break
-    return results 
+    return results
